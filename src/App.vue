@@ -1,31 +1,101 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-toolbar app fixed clipped-left dark color="deep-orange darken-1">
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">VUE-CRUD-APP</router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn 
+        flat 
+        v-for="item in navItems" 
+        :key="item.title"
+        :to="item.link"
+        >
+          <v-icon left>{{ item.icon }}</v-icon>
+          {{ item.title }}
+        </v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn 
+        flat 
+        v-if="isAuthenticated"
+        @click="onLogOut"
+        >
+          <v-icon left>exit_to_app</v-icon>
+          Logout
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-content>
+      <main>
+        <router-view class="view"></router-view>
+      </main>
+    </v-content>
+    <v-footer
+    dark
+    height="auto">
+      <v-card
+        class="flex"
+        flat
+        tile>
+        <v-card-title class="deep-orange darken-1">
+          &copy;2019 — <strong>Vue-Crud-Firebase</strong>
+        </v-card-title>
+      </v-card>
+    </v-footer>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+import firebase from 'firebase'
+  export default {
+    props: {
+      source: String
+    },
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    computed: {
+      navItems () {
+        if (this.isAuthenticated) {
+          return [
+            {}
+          ]
+        }else {
+          return [
+            { icon: 'face', title: 'Sign In', link: '/login'},
+            { icon: 'lock_open', title: 'Sign Up', link: '/signUp'}
+          ]
+        }
+      },
+      Created() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            this.user = user
+          } else {
+            this.user = null
+          }
+        })
+      },
+      isAuthenticated () {
+        this.user === !null && this.user === !undefined
+      }
+    
+    },
+    methods: {
+      onLogOut () {
+        let auth = firebase.auth()
+        auth.signOut()
+        this.$router.replace('/login')
+      },
+      
+    }
+  }
+</script>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style scoped>
+  /* .view {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  } */
 </style>
