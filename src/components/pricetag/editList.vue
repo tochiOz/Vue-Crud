@@ -38,29 +38,6 @@
 </template>
 
 <script>
-import { db } from '@/config/db'
+// import { db } from '@/config/db'
 
-  export default {
-
-    data: () => ({
-        newItem: {}
-    }),
-
-    firebase: {
-        items: db.ref('items')//created node within the database
-    },
-    
-
-    methods: { 
-        deleteItem (key) {
-            this.$firebaseRefs.items.child(key).remove()
-            .then(() => {
-                alert('Successfully, removed')
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
-        }
-    }
-  }
 </script>
