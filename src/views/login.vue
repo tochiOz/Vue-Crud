@@ -43,8 +43,6 @@
                     <v-btn
                     type="submit"
                     class="deep-orange darken-1"
-                    v-model="onLogin"
-                    required
                     dark
                     >Sign In</v-btn>
                   </v-flex>
@@ -65,7 +63,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+
 export default {
   name: 'login',
   data () {
@@ -76,16 +74,18 @@ export default {
   },
   methods: {
     onLogin () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      .then((user) => {
-        alert('Welcome ' + user)
-        console.log(user)
-        this.$router.push('/home')
-        
-      })
-      .catch((err) => {
-        alert(err.message)
-      })
+      const loginDetails = {
+        email: this.email,
+        passsword: this.paassword
+      }
+
+      try {
+        const res = this.$http.post('/users/login', loginDetails)
+        console.log(res)
+        return this.$router.push('/')
+      } catch (error) {
+        return console.log('this is the error' + error)
+      }
     }
   }
 }

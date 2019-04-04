@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+
 export default {
   name: 'signUp',
   data () {
@@ -93,17 +93,25 @@ export default {
       return this.password === this.confirmPassword ? true : 'Password does not match!!'
     }
   },
+
   methods: {
-    onSignUp: function() {
-     firebase.auth().createUserWithEmailAndPassword(this.email, this.password )
-      .then((user) => {
-        window.alert('Account has been created')
-        this.$router.replace('/login')
-      })
-      .catch((err) => {
-        alert(err.message)
-      })
-    }
+    async onSignUp() {
+      const userDetails = {
+        email: this.email,
+        password: this.password
+      }
+
+      // let url = 'localhost:8080/api/v1/users'
+
+      try {
+       
+        const res = await this.$http.post('/users/register', userDetails)
+          console.log('success ' + res)
+          return this.$router.push('/login')
+      } catch (err) {
+        return console.log('this is error ' + err)
+      }
+    }  
   }
 }
 </script>
