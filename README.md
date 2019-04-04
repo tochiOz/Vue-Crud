@@ -1,4 +1,4 @@
-# vue-crud-firebase
+# vue-crud-node_express
 
 ## Project setup
 ```
