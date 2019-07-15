@@ -16,7 +16,7 @@
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <!-- <v-toolbar-items class="hidden-sm-and-down">
         <v-btn 
         flat 
         v-if="isAuthenticated"
@@ -25,7 +25,7 @@
           <v-icon left>exit_to_app</v-icon>
           Logout
         </v-btn>
-      </v-toolbar-items>
+      </v-toolbar-items> -->
     </v-toolbar>
     <v-content>
       <main>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+// import firebase from 'firebase'
   export default {
     props: {
       source: String
@@ -58,7 +58,7 @@ import firebase from 'firebase'
       navItems () {
         if (this.isAuthenticated) {
           return [
-            {}
+            { icon: 'face', title: 'Sign In', link: '/'}
           ]
         }else {
           return [
@@ -67,28 +67,8 @@ import firebase from 'firebase'
           ]
         }
       },
-      Created() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            this.user = user
-          } else {
-            this.user = null
-          }
-        })
-      },
-      isAuthenticated () {
-        this.user === !null && this.user === !undefined
-      }
-    
-    },
-    methods: {
-      onLogOut () {
-        let auth = firebase.auth()
-        auth.signOut()
-        this.$router.replace('/login')
-      },
-      
     }
+    
   }
 </script>
 

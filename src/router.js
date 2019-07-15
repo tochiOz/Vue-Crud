@@ -6,7 +6,7 @@ import Home from './components/home.vue'
 import EditList from './components/pricetag/editList'
 import Todo from './components/todo/todo'
 import Editor from './components/todo/editor'
-import * as firebase from 'firebase'
+
 
 Vue.use(Router)
 
@@ -53,14 +53,14 @@ let router = new Router({
     }
   ]
 })
-router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+// router.beforeEach((to, from, next) => {
+//   let currentUser = firebase.auth().currentUser
+//   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
-  if (!currentUser && requiresAuth) {
-      next('/login')
-  } else {
-      next()
-  }
-})
+//   if (!currentUser && requiresAuth) {
+//       next('/login')
+//   } else {
+//       next()
+//   }
+// })
  export default router

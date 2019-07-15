@@ -40,16 +40,14 @@
 </template>
 
 <script>
-import { db } from '@/config/db'
+// import { db } from '@/config/db'
 export default {
 
-    data: () => ({
+    // data: () => ({
 
-    }),
+    // }),
 
-    firebase: {
-        tasks: db.ref('tasks')//created node within the database
-    },
+   
 }
 </script>
 

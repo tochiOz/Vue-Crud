@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { db } from '@/config/db'
+// import { db } from '@/config/db'
 
 export default {
     components: {
@@ -43,39 +43,12 @@ export default {
         newItem: {}   
     }),
 
-    firebase: {
-        items: db.ref('items'),//created node within the database
-        itemsObj: {
-            source: db.ref('items'),
-            asObject: true
-        }
-    },
-
-    created() {
-        this.editItem()
-    },    
-
     methods: {
-
-        editItem () {
-            if (this.itemId) {
-                this.newItem = this.items.find( item => item['.key'] === this.itemId )
-            }
-        },
-
-        submitItem () {
-            if (this.itemId) {
-                this.$firebaseRefs.items.child(this.itemId).update({Item: this.newItem.Item, price: this.newItem.price})
-                .then(() => {
-                    this.dialog = false
-                    alert('Item changed Successfully')
-                })
-                .catch((err) => {
-                    alert('Ops, there is an ' + err.message)
-                })
-            }
+        submitItem() {
+            
         }
-
     }
+
+    
 }
 </script>

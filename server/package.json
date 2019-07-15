@@ -1,0 +1,38 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "A To-Do app to list action plans",
+  "main": "api.js",
+  "scripts": {
+    "start": "babel-watch api.js",
+    "build": "babel api.js --out-dir build",
+    "create": "node ./api/db.js createUserTable",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tueloper",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.5",
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "make-runnable": "^1.3.6",
+    "moment": "^2.24.0",
+    "pg": "^7.9.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.0.0"
+  }
+}

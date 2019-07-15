@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { db } from '@/config/db'
+// import { db } from '@/config/db'
 
 export default {
     
@@ -42,24 +42,12 @@ export default {
         }   
     }),
 
-    firebase: {
-        items: db.ref('items')//created node within the database
-    },
-
     methods: {
-        addItem () {
-            this.$firebaseRefs.items.push({
-                Item: this.newItem.name,
-                price: this.newItem.price
-            })
-            .then((data) => {
-                this.dialog = false
-                alert('Item id (' + data.key + ') has been added Successfully')
-            })
-            .catch((err) => {
-                alert('oops, there is ' + err.message)
-            })
+        addItem() {
+            
         }
     }
+
+    
 }
 </script>
