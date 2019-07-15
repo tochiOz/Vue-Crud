@@ -9,7 +9,7 @@
           </v-card-title>
           <v-card-text>
             <v-container>
-              <form @submit.prevent="onSignUp">
+              <form @submit.prevent="onSignUp" method="post">
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
@@ -79,6 +79,8 @@
 
 <script>
 
+import authUser from '@/services/authUser'
+
 export default {
   name: 'signUp',
   data () {
@@ -96,21 +98,19 @@ export default {
 
   methods: {
     async onSignUp() {
-      const userDetails = {
-        email: this.email,
-        password: this.password
-      }
-
-      // let url = 'localhost:8080/api/v1/users'
-
       try {
-       
-        const res = await this.$http.post('/users/register', userDetails)
-          console.log('success ' + res)
-          return this.$router.push('/login')
-      } catch (err) {
-        return console.log('this is error ' + err)
+        const userDetails = {
+          email: this.email,
+          password: this.password
+        }
+
+        const response = await authUser.registerUser({userDetails})
+        return console.log(data)
+      } catch (e) {
+        return console.log(JSON.stringify(e))
       }
+      // return this.$store.dispatch('resgisterUser', userDetails)
+      // return this.$router.push('/login')
     }  
   }
 }

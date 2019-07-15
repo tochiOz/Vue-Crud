@@ -1,6 +1,6 @@
 //Engine room
 import express from 'express'
-import router from './api/router/router'
+import router from './api/routes/router'
 
 const app = express(),
 bodyParser = require('body-parser');

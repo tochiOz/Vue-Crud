@@ -15,7 +15,7 @@ export const user = {
      */
 
     createUser(req, res) {
-
+return res.status(200).send('cool')
         //checks and information validation
         if (!req.body.email || !req.body.password) {
             return res.status(400).send({ 'message': 'Please Fill a valid Email/Password'})

@@ -78,7 +78,6 @@ export default {
         email: this.email,
         passsword: this.paassword
       }
-
       try {
         const res = this.$http.post('/users/login', loginDetails)
         console.log(res)
